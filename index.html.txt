@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine 💖</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 90%;
+      width: 400px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .buttons {
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      transition: transform 0.2s ease;
+    }
+
+    #yesBtn {
+      background-color: #ff4d6d;
+      color: white;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10; /* always on top */
+    }
+
+    #noBtn {
+      background-color: #ddd;
+      color: #333;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #message {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      color: #ff4d6d;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Maatla Pauline Chominyana 💕</h1>
+    <p>Bubu… will you be my Valentine?</p>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 🙃</button>
+    </div>
+
+    <div id="message">
+      YAY!!! 💘 I knew it 😘  
+      Happy Valentine’s Day, my love 💕
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const message = document.getElementById("message");
+
+    function moveNoButton() {
+      const padding = 20;
+
+      const yesRect = yesBtn.getBoundingClientRect();
+
+      let maxX = window.innerWidth - noBtn.offsetWidth - padding;
+      let maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+      let x, y;
+
+      do {
+        x = Math.random() * maxX;
+        y = Math.random() * maxY;
+      } while (
+        x > yesRect.left - noBtn.offsetWidth &&
+        x < yesRect.right &&
+        y > yesRect.top - noBtn.offsetHeight &&
+        y < yesRect.bottom
+      );
+
+      noBtn.style.transform = `translate(${x - window.innerWidth / 2 + noBtn.offsetWidth / 2}px,
+                                         ${y - window.innerHeight / 2 + noBtn.offsetHeight / 2}px)`;
+    }
+
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("touchstart", moveNoButton);
+
+    yesBtn.addEventListener("click", () => {
+      message.style.display = "block";
+      noBtn.style.display = "none";
+      yesBtn.style.transform = "translateX(-50%) scale(1.2)";
+    });
+  </script>
+
+</body>
+</html>
